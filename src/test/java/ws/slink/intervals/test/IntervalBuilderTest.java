@@ -91,6 +91,7 @@ public class IntervalBuilderTest {
         builder.start(TEST_START);
         assertBuilderTime(builder, "start", TEST_START.toLocalTime());
     }
+    @SuppressWarnings("ConstantValue")
     @Test(expected = IllegalArgumentException.class)
     public void t0109_builder_can_not_set_null_start_time() {
         LocalTime ldt = null;
@@ -104,6 +105,7 @@ public class IntervalBuilderTest {
         assertBuilderTime(builder, "start", TEST_START.toLocalTime());
         assertBuilderDate(builder, "start", TEST_START.toLocalDate());
     }
+    @SuppressWarnings("ConstantValue")
     @Test(expected = IllegalArgumentException.class)
     public void t0111_builder_can_not_set_null_start_date_time() {
         LocalDateTime ldt = null;
@@ -115,6 +117,7 @@ public class IntervalBuilderTest {
         builder.end(TEST_END);
         assertBuilderTime(builder, "end", TEST_END.toLocalTime());
     }
+    @SuppressWarnings("ConstantValue")
     @Test(expected = IllegalArgumentException.class)
     public void t0113_builder_can_not_set_null_end_time() {
         LocalTime ldt = null;
@@ -128,6 +131,7 @@ public class IntervalBuilderTest {
         assertBuilderTime(builder, "end", TEST_END.toLocalTime());
         assertBuilderDate(builder, "end", TEST_END.toLocalDate());
     }
+    @SuppressWarnings("ConstantValue")
     @Test(expected = IllegalArgumentException.class)
     public void t0115_builder_can_not_set_null_end_date_time() {
         LocalDateTime ldt = null;

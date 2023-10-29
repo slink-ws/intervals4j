@@ -12,6 +12,7 @@ import java.util.TimeZone;
 import static org.junit.Assert.assertEquals;
 import static ws.slink.intervals.test.common.TestConfig.UTC_TIMEZONE;
 
+@SuppressWarnings("CommentedOutCode")
 public class Assertions {
 
     public static void assertBuilderTimezone(IntervalBuilder builder, TimeZone expected) {

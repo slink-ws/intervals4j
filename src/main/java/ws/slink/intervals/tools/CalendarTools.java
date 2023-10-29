@@ -77,12 +77,14 @@ public final class CalendarTools {
         999999999
     );
 
+    @SuppressWarnings("unused")
     public static Interval yearFromString(String input) {
         return yearFromString(input, "UTC");
     }
     public static Interval yearFromString(String input, String timezone) {
         return yearFromString(input, timezone, 0);
     }
+    @SuppressWarnings("unused")
     public static Interval yearFromString(String input, int offset) {
         return yearFromString(input, "UTC", offset);
     }
@@ -95,12 +97,14 @@ public final class CalendarTools {
         }
     }
 
+    @SuppressWarnings("unused")
     public static Interval monthFromString(String input) {
         return monthFromString(input, "UTC");
     }
     public static Interval monthFromString(String input, String timezone) {
         return monthFromString(input, timezone, 0);
     }
+    @SuppressWarnings("unused")
     public static Interval monthFromString(String input, int offset) {
         return monthFromString(input, "UTC", offset);
     }
@@ -113,12 +117,14 @@ public final class CalendarTools {
         }
     }
 
+    @SuppressWarnings("unused")
     public static Interval dayFromString(String input) {
         return dayFromString(input, "UTC");
     }
     public static Interval dayFromString(String input, String timezone) {
         return dayFromString(input, timezone, 0);
     }
+    @SuppressWarnings("unused")
     public static Interval dayFromString(String input, int offset) {
         return dayFromString(input, "UTC", offset);
     }

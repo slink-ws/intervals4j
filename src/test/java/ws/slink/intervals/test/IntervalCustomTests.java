@@ -5,10 +5,20 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import ws.slink.intervals.Interval;
 import ws.slink.intervals.IntervalBuilder;
+import ws.slink.intervals.exception.MethodNotSupportedException;
+import ws.slink.intervals.impl.CustomInterval;
+import ws.slink.intervals.impl.Day;
+import ws.slink.intervals.impl.Month;
+import ws.slink.intervals.impl.Year;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.TimeZone;
 
 import static org.junit.Assert.assertEquals;
+import static ws.slink.intervals.test.common.Assertions.assertGivenTimezone;
+import static ws.slink.intervals.test.common.TestConfig.TEST_END;
+import static ws.slink.intervals.test.common.TestConfig.TEST_START;
 import static ws.slink.intervals.test.common.TestConfig.TEST_TIMEZONE;
 import static ws.slink.intervals.test.common.TestConfig.TEST_TIMEZONE_STR;
 import static ws.slink.intervals.test.common.TestConfig.UTC_TIMEZONE;
@@ -16,6 +26,61 @@ import static ws.slink.intervals.test.common.TestConfig.UTC_TIMEZONE;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class IntervalCustomTests {
 
+    // region - 00: fixed interval creation
+
+    @Test
+    public void test0001_create_year() {
+        Year year = new Year(
+                TEST_TIMEZONE,
+                LocalDateTime.of(2023, 10, 1, 0, 0, 0, 0),
+                LocalDateTime.of(2023, 10, 1, 0, 0, 0, 0)
+        );
+        assertGivenTimezone(year, TEST_TIMEZONE);
+        assertEquals(
+                LocalDateTime.of(2023, 1, 1, 0, 0, 0, 0),
+                year.getStart()
+        );
+        assertEquals(
+                LocalDateTime.of(2023, 12, 31, 23, 59, 59, 999999999),
+                year.getEnd()
+        );
+    }
+    @Test
+    public void test0002_create_month() {
+        Month month = new Month(
+            TEST_TIMEZONE,
+            LocalDateTime.of(2023, 10, 1, 0, 0, 0, 0),
+            LocalDateTime.of(2023, 10, 1, 0, 0, 0, 0)
+        );
+        assertGivenTimezone(month, TEST_TIMEZONE);
+        assertEquals(
+            LocalDateTime.of(2023, 10, 1, 0, 0, 0, 0),
+            month.getStart()
+        );
+        assertEquals(
+            LocalDateTime.of(2023, 10, 31, 23, 59, 59, 999999999),
+            month.getEnd()
+        );
+    }
+    @Test
+    public void test0003_create_day() {
+        Day day = new Day(
+            TEST_TIMEZONE,
+            LocalDateTime.of(2023, 10, 15, 0, 0, 0, 0),
+            LocalDateTime.of(2023, 10, 15, 0, 0, 0, 0)
+        );
+        assertGivenTimezone(day, TEST_TIMEZONE);
+        assertEquals(
+            LocalDateTime.of(2023, 10, 15, 0, 0, 0, 0),
+            day.getStart()
+        );
+        assertEquals(
+            LocalDateTime.of(2023, 10, 15, 23, 59, 59, 999999999),
+            day.getEnd()
+        );
+    }
+
+    // endregion
     // region - 01: previous year
 
     @Test
@@ -33,7 +98,7 @@ public class IntervalCustomTests {
         );
     }
     @Test
-    public void test0102_check_previous_year_with_offet() {
+    public void test0102_check_previous_year_with_offset() {
         Interval interval = IntervalBuilder.year(2023, 10);
         Interval previous = interval.previous();
         assertEquals(UTC_TIMEZONE, previous.timezone());
@@ -93,7 +158,7 @@ public class IntervalCustomTests {
         );
     }
     @Test
-    public void test0202_check_previous_month_with_offet() {
+    public void test0202_check_previous_month_with_offset() {
         Interval interval = IntervalBuilder.month(2023, 11, 10);
         Interval previous = interval.previous();
         assertEquals(UTC_TIMEZONE, previous.timezone());
@@ -473,5 +538,63 @@ public class IntervalCustomTests {
     }
 
     // endregion
+    // region - 08: negative cases
 
+    @Test(expected = MethodNotSupportedException.class)
+    public void test0801_previous_fails_for_common_interval() {
+        new IntervalBuilder().build().previous();
+    }
+    @Test(expected = MethodNotSupportedException.class)
+    public void test0802_with_previous_fails_for_common_interval() {
+        new IntervalBuilder().build().withPrevious();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void test0803_create_interval_with_null_timezone() {
+        new CustomInterval(null, null, null);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void test0804_create_interval_with_null_start() {
+        new CustomInterval(TimeZone.getTimeZone(ZoneOffset.UTC), null, null);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void test0805_create_interval_with_null_end() {
+        new CustomInterval(
+            TimeZone.getTimeZone(ZoneOffset.UTC),
+            TEST_START,
+            null
+        );
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void test0806_create_interval_with_invalid_dates() {
+        new CustomInterval(
+            TimeZone.getTimeZone(ZoneOffset.UTC),
+            TEST_END,
+            TEST_START
+        );
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void test0807_create_interval_with_invalid_offset() {
+        new CustomInterval(
+                TimeZone.getTimeZone(ZoneOffset.UTC),
+                TEST_START,
+                TEST_END,
+                31
+        );
+    }
+
+    // endregion
+    // region - 09: misc
+
+    @Test
+    public void test0901_interval_to_string_test() {
+        Interval interval = new CustomInterval(
+            TimeZone.getTimeZone(ZoneOffset.UTC),
+            TEST_START,
+            TEST_END
+        );
+        assertEquals("2023-10-01 00:00:00.000 - 2023-10-31 23:59:59.999 UTC", interval.toString());
+    }
+
+    // endregion
 }
