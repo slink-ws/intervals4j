@@ -1,4 +1,4 @@
-package ws.slink.intervals.impl.abs;
+package ws.slink.intervals.impl;
 
 import ws.slink.intervals.impl.CustomInterval;
 

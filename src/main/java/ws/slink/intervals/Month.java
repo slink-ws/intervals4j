@@ -1,8 +1,6 @@
-package ws.slink.intervals.impl;
+package ws.slink.intervals;
 
-import ws.slink.intervals.Interval;
-import ws.slink.intervals.IntervalBuilder;
-import ws.slink.intervals.impl.abs.OffsetAwareInterval;
+import ws.slink.intervals.impl.OffsetAwareInterval;
 
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
@@ -40,6 +38,25 @@ public class Month extends OffsetAwareInterval {
             .start(this.start.minusMonths(1))
             .end(this.end)
             .build();
+    }
+
+    public static Month of(String input) {
+        return of(input, "UTC");
+    }
+    public static Month of(String input, String timezone) {
+        return of(input, timezone, 0);
+    }
+    public static Month of(String input, int offset) {
+        return of(input, "UTC", offset);
+    }
+    public static Month of(String input, String timezone, int offset) {
+        Interval interval = IntervalBuilder.parse(input, timezone, offset);
+        return IntervalBuilder.month(
+            interval.getStart().getYear(),
+            interval.getStart().getMonthValue(),
+            timezone,
+            offset
+        );
     }
 
 }

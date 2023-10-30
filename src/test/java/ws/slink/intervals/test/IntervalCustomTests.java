@@ -7,9 +7,9 @@ import ws.slink.intervals.Interval;
 import ws.slink.intervals.IntervalBuilder;
 import ws.slink.intervals.exception.MethodNotSupportedException;
 import ws.slink.intervals.impl.CustomInterval;
-import ws.slink.intervals.impl.Day;
-import ws.slink.intervals.impl.Month;
-import ws.slink.intervals.impl.Year;
+import ws.slink.intervals.Day;
+import ws.slink.intervals.Month;
+import ws.slink.intervals.Year;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;

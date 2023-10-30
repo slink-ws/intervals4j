@@ -8,7 +8,7 @@ public class InvalidYearException extends InvalidIntervalException {
         super(MESSAGE_PREFIX);
     }
     public InvalidYearException(String message) {
-        super(message);
+        super(MESSAGE_PREFIX + ": " + message);
     }
     public InvalidYearException(Throwable throwable) {
         super(throwable);

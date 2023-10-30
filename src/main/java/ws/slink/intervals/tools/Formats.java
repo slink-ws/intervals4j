@@ -44,6 +44,9 @@ public final class Formats {
         .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
         .parseDefaulting(ChronoField.NANO_OF_SECOND, 0)
         .toFormatter();
-
+    @SuppressWarnings("unused")
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
+        .appendPattern(DATE_TIME_FORMAT)
+        .toFormatter();
 
 }

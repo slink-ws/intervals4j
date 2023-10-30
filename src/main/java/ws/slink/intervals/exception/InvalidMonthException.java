@@ -8,7 +8,7 @@ public class InvalidMonthException extends InvalidIntervalException {
         super(MESSAGE_PREFIX);
     }
     public InvalidMonthException(String message) {
-        super(message);
+        super(MESSAGE_PREFIX + ": " + message);
     }
     public InvalidMonthException(Throwable throwable) {
         super(throwable);

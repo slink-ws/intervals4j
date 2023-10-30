@@ -10,9 +10,9 @@ import ws.slink.intervals.exception.InvalidDayException;
 import ws.slink.intervals.exception.InvalidIntervalFormatException;
 import ws.slink.intervals.exception.InvalidMonthException;
 import ws.slink.intervals.exception.InvalidYearException;
-import ws.slink.intervals.impl.Day;
-import ws.slink.intervals.impl.Month;
-import ws.slink.intervals.impl.Year;
+import ws.slink.intervals.Day;
+import ws.slink.intervals.Month;
+import ws.slink.intervals.Year;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -20,6 +20,7 @@ import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.util.TimeZone;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static ws.slink.intervals.test.common.Assertions.assertBuilderDate;
@@ -584,27 +585,251 @@ public class IntervalBuilderTest {
     // endregion
 
     // endregion
-    // region - 05: parse errors
+    // region - 05: parse custom intervals
+
+    // region -> year
+
+    @Test
+    public void t0501_can_create_year_from_string() {
+        Year year = Year.of("2023");
+        assertNotNull(year);
+        assertUtcTimezone(year);
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 1, 1, 0, 0, 0, 0),
+            year.getStart())
+        ;
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 12, 31, 23, 59, 59, 999999999),
+            year.getEnd()
+        );
+    }
+    @Test
+    public void t0502_can_create_year_from_string_with_timezone() {
+        Year year = Year.of("2023", TEST_TIMEZONE_STR);
+        assertNotNull(year);
+        assertGivenTimezone(year, TEST_TIMEZONE);
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 1, 1, 0, 0, 0, 0),
+            year.getStart())
+        ;
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 12, 31, 23, 59, 59, 999999999),
+            year.getEnd()
+        );
+    }
+    @Test
+    public void t0503_can_create_year_from_string_with_offset() {
+        Year year = Year.of("2023", 10);
+        assertNotNull(year);
+        assertUtcTimezone(year);
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 1, 1, 10, 0, 0, 0),
+            year.getStart())
+        ;
+        assertGivenDateTime(
+            LocalDateTime.of(2024, 1, 1, 9, 59, 59, 999999999),
+            year.getEnd()
+        );
+    }
+    @Test
+    public void t0504_can_create_year_from_string_with_timezone_and_offset() {
+        Year year = Year.of("2023", TEST_TIMEZONE_STR, 10);
+        assertNotNull(year);
+        assertGivenTimezone(year, TEST_TIMEZONE);
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 1, 1, 10, 0, 0, 0),
+            year.getStart())
+        ;
+        assertGivenDateTime(
+            LocalDateTime.of(2024, 1, 1, 9, 59, 59, 999999999),
+            year.getEnd()
+        );
+    }
+
+    // endregion
+    // region -> month
+    @Test
+    public void t0505_can_create_month_from_string() {
+        Month month = Month.of("2023-10");
+        assertNotNull(month);
+        assertUtcTimezone(month);
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 10, 1, 0, 0, 0, 0),
+            month.getStart())
+        ;
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 10, 31, 23, 59, 59, 999999999),
+            month.getEnd()
+        );
+    }
+    @Test
+    public void t0506_can_create_month_from_string_with_timezone() {
+        Month month = Month.of("2023-10", TEST_TIMEZONE_STR);
+        assertNotNull(month);
+        assertGivenTimezone(month, TEST_TIMEZONE);
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 10, 1, 0, 0, 0, 0),
+            month.getStart())
+        ;
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 10, 31, 23, 59, 59, 999999999),
+            month.getEnd()
+        );
+    }
+    @Test
+    public void t0507_can_create_month_from_string_with_offset() {
+        Month month = Month.of("2023-10", 10);
+        assertNotNull(month);
+        assertUtcTimezone(month);
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 10, 1, 10, 0, 0, 0),
+            month.getStart())
+        ;
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 11, 1, 9, 59, 59, 999999999),
+            month.getEnd()
+        );
+    }
+    @Test
+    public void t0508_can_create_month_from_string_with_timezone_and_offset() {
+        Month month = Month.of("2023-10", TEST_TIMEZONE_STR, 10);
+        assertNotNull(month);
+        assertGivenTimezone(month, TEST_TIMEZONE);
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 10, 1, 10, 0, 0, 0),
+            month.getStart())
+        ;
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 11, 1, 9, 59, 59, 999999999),
+            month.getEnd()
+        );
+    }
+    // endregion
+    // region -> day
+
+    @Test
+    public void t0509_can_create_day_from_string() {
+        Day day = Day.of("2023-10-15");
+        assertNotNull(day);
+        assertUtcTimezone(day);
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 10, 15, 0, 0, 0, 0),
+            day.getStart())
+        ;
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 10, 15, 23, 59, 59, 999999999),
+            day.getEnd()
+        );
+    }
+    @Test
+    public void t0510_can_create_day_from_string_with_timezone() {
+        Day day = Day.of("2023-10-15", TEST_TIMEZONE_STR);
+        assertNotNull(day);
+        assertGivenTimezone(day, TEST_TIMEZONE);
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 10, 15, 0, 0, 0, 0),
+            day.getStart())
+        ;
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 10, 15, 23, 59, 59, 999999999),
+            day.getEnd()
+        );
+    }
+    @Test
+    public void t0511_can_create_day_from_string_with_offset() {
+        Day day = Day.of("2023-10-15", 10);
+        assertNotNull(day);
+        assertUtcTimezone(day);
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 10, 15, 10, 0, 0, 0),
+            day.getStart())
+        ;
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 10, 16, 9, 59, 59, 999999999),
+            day.getEnd()
+        );
+    }
+    @Test
+    public void t0512_can_create_day_from_string_with_timezone_and_offset() {
+        Day day = Day.of("2023-10-15", TEST_TIMEZONE_STR, 10);
+        assertNotNull(day);
+        assertGivenTimezone(day, TEST_TIMEZONE);
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 10, 15, 10, 0, 0, 0),
+            day.getStart())
+        ;
+        assertGivenDateTime(
+            LocalDateTime.of(2023, 10, 16, 9, 59, 59, 999999999),
+            day.getEnd()
+        );
+    }
+    // endregion
+
+    // endregion
+    // region - 06: parse errors
 
     @Test(expected = InvalidIntervalFormatException.class)
-    public void t0501_parse_fails_on_invalid_input() {
+    public void t0601_parse_fails_on_invalid_input() {
         IntervalBuilder.parse("2023-51");
     }
     @Test(expected = InvalidIntervalFormatException.class)
-    public void t0502_parse_fails_on_invalid_input() {
+    public void t0602_parse_fails_on_invalid_input() {
         IntervalBuilder.parse("2023-10-");
     }
     @Test(expected = InvalidIntervalFormatException.class)
-    public void t0503_parse_fails_on_invalid_input() {
+    public void t0603_parse_fails_on_invalid_input() {
         IntervalBuilder.parse("2023-");
     }
     @Test(expected = InvalidIntervalFormatException.class)
-    public void t0504_parse_fails_on_invalid_input() {
+    public void t0604_parse_fails_on_invalid_input() {
         IntervalBuilder.parse("2023-10-51");
     }
     @Test(expected = InvalidIntervalFormatException.class)
-    public void t0505_parse_fails_on_invalid_input() {
+    public void t0605_parse_fails_on_invalid_input() {
         IntervalBuilder.parse("2023-10-15-");
+    }
+
+    // endregion
+    // region - 07: negative cases
+
+    @Test(expected = IllegalArgumentException.class)
+    public void t0701_fails_to_set_interval_start_after_end() {
+        new IntervalBuilder().end(TEST_START).start(TEST_END);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void t0702_fails_to_set_interval_end_before_start() {
+        new IntervalBuilder().start(TEST_END).end(TEST_START);
+    }
+
+    // endregion
+    // region - 08: misc
+
+    @Test
+    public void t0801_can_reset_start_time() {
+        Interval interval = new IntervalBuilder()
+            .start(TEST_START)
+            .start(LocalTime.of(12, 10, 15, 0))
+            .build();
+        assertEquals(TEST_START.getYear(), interval.getStart().getYear());
+        assertEquals(TEST_START.getMonth(), interval.getStart().getMonth());
+        assertEquals(TEST_START.getDayOfMonth(), interval.getStart().getDayOfMonth());
+        assertEquals(12, interval.getStart().getHour());
+        assertEquals(10, interval.getStart().getMinute());
+        assertEquals(15, interval.getStart().getSecond());
+    }
+
+    @Test
+    public void t0802_can_reset_end_time() {
+        Interval interval = new IntervalBuilder()
+            .end(TEST_END)
+            .end(LocalTime.of(12, 10, 15, 0))
+            .build();
+        assertEquals(TEST_END.getYear(), interval.getEnd().getYear());
+        assertEquals(TEST_END.getMonth(), interval.getEnd().getMonth());
+        assertEquals(TEST_END.getDayOfMonth(), interval.getEnd().getDayOfMonth());
+        assertEquals(12, interval.getEnd().getHour());
+        assertEquals(10, interval.getEnd().getMinute());
+        assertEquals(15, interval.getEnd().getSecond());
     }
 
     // endregion
