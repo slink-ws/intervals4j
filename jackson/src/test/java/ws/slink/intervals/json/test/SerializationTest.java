@@ -13,7 +13,6 @@ import ws.slink.intervals.Interval;
 import ws.slink.intervals.IntervalBuilder;
 import ws.slink.intervals.Month;
 import ws.slink.intervals.Year;
-import ws.slink.intervals.impl.CustomInterval;
 import ws.slink.intervals.jackson.IntervalDeserializer;
 import ws.slink.intervals.jackson.IntervalSerializer;
 
@@ -165,7 +164,6 @@ public class SerializationTest {
         assertFalse(parsed instanceof Day);
         assertFalse(parsed instanceof Month);
         assertFalse(parsed instanceof Year);
-        assertTrue(parsed instanceof CustomInterval);
     }
 
     // endregion

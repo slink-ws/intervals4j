@@ -9,7 +9,7 @@
         <version>0.0.2</version>
     </parent>
 
-    <artifactId>jackson</artifactId>
+    <artifactId>intervals4j-jackson</artifactId>
 
     <dependencies>
         <dependency>
