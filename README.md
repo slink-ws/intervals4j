@@ -127,17 +127,24 @@ For serialization purposes one can use intervals4j serialization libarary (based
 ```
 
 ```java
-    Interval interval = Month.of("2023-10");
-    new IntervalSerializer().
-    Interval check = IntervalBuilder.parse("2023-10-16", "IST");
-    System.out.println(interval.contains(check.start()));
-    System.out.println(interval.contains(check.end()));
-    // prints:
-    // {
-    //    "timezone": "UTC",
-    //    "start": "2023-10-01 00:00:00.000",
-    //    "end": "2023-10-31 23:59:59.999",
-    //    "type": "month"
-    // }
+
+    // spring
+    @Configuration
+    public class ObjectMapperConfig {
+        @Bean
+        Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
+            return builder -> builder
+                .serializerByType(Interval.class, new IntervalSerializer())
+                .deserializerByType(Interval.class, new IntervalDeserializer());
+        }
+    }
+    
+    // plain java
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.registerModule(
+      new SimpleModule()
+        .addSerializer(Interval.class, new IntervalSerializer())
+        .addDeserializer(Interval.class, new IntervalDeserializer())
+      );
 
 ```
