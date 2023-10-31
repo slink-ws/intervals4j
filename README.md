@@ -12,8 +12,8 @@ Supported intervals are:
 ```xml
 <dependency>
     <groupId>ws.slink</groupId>
-    <artifactId>intervals4j</artifactId>
-    <version>0.0.1</version>
+    <artifactId>intervals4j-core</artifactId>
+    <version>0.0.2</version>
 </dependency>
 ```
 
@@ -113,5 +113,31 @@ offset allows to shift original interval bounds
     // prints:
     // true
     // false
+
+```
+
+### Serialization
+For serialization purposes one can use intervals4j serialization libarary (based on Jackson)
+```xml
+    <dependency>
+        <groupId>ws.slink</groupId>
+        <artifactId>intervals4j-jackson</artifactId>
+        <version>0.0.2</version>
+    </dependency>
+```
+
+```java
+    Interval interval = Month.of("2023-10");
+    new IntervalSerializer().
+    Interval check = IntervalBuilder.parse("2023-10-16", "IST");
+    System.out.println(interval.contains(check.start()));
+    System.out.println(interval.contains(check.end()));
+    // prints:
+    // {
+    //    "timezone": "UTC",
+    //    "start": "2023-10-01 00:00:00.000",
+    //    "end": "2023-10-31 23:59:59.999",
+    //    "type": "month"
+    // }
 
 ```
