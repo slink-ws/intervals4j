@@ -6,6 +6,9 @@ import ws.slink.intervals.tools.CalendarTools;
 import java.time.LocalDateTime;
 import java.util.TimeZone;
 
+/**
+ * `Day` implementation of Interval interface
+ */
 public class Day extends OffsetAwareInterval {
 
     public Day(TimeZone timezone, LocalDateTime start, LocalDateTime end) {

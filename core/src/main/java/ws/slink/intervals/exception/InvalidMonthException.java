@@ -1,5 +1,8 @@
 package ws.slink.intervals.exception;
 
+/**
+ * Exception thrown on attempt to create invalid month interval
+ */
 public class InvalidMonthException extends InvalidIntervalException {
 
     private static final String MESSAGE_PREFIX = "invalid month";

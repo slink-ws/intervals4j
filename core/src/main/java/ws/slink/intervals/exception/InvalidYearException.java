@@ -1,5 +1,8 @@
 package ws.slink.intervals.exception;
 
+/**
+ * Exception thrown on attempt to create invalid year interval
+ */
 public class InvalidYearException extends InvalidIntervalException {
 
     private static final String MESSAGE_PREFIX = "invalid year";

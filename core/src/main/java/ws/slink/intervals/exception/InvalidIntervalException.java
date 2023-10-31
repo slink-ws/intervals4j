@@ -1,5 +1,8 @@
 package ws.slink.intervals.exception;
 
+/**
+ * Exception thrown on attempt to create invalid interval
+ */
 public class InvalidIntervalException extends RuntimeException {
 
     private static final String MESSAGE_PREFIX = "invalid interval";

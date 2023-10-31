@@ -19,6 +19,9 @@ import static ws.slink.intervals.jackson.internal.Constants.START_FIELD;
 import static ws.slink.intervals.jackson.internal.Constants.TIMEZONE_FIELD;
 import static ws.slink.intervals.jackson.internal.Constants.TYPE_FIELD;
 
+/**
+ * Jackson-based interval deserializer
+ */
 public class IntervalDeserializer extends StdDeserializer<Interval> {
 
     public IntervalDeserializer() {

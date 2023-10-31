@@ -7,6 +7,9 @@ import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.TimeZone;
 
+/**
+ * `Year` implementation of Interval interface
+ */
 public class Year extends OffsetAwareInterval {
 
     public Year(TimeZone timezone, LocalDateTime start, LocalDateTime end) {

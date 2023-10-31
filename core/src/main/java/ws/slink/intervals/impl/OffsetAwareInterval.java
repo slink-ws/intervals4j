@@ -3,6 +3,9 @@ package ws.slink.intervals.impl;
 import java.time.LocalDateTime;
 import java.util.TimeZone;
 
+/**
+ * Abstract interval with memoized `offset` field
+ */
 public abstract class OffsetAwareInterval extends CustomInterval {
 
     protected int offset;

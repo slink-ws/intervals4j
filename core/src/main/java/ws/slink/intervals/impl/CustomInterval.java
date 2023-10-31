@@ -10,6 +10,9 @@ import java.util.TimeZone;
 import static ws.slink.intervals.tools.Formats.DATE_TIME_FORMAT;
 import static ws.slink.intervals.tools.Formats.MAX_OFFSET;
 
+/**
+ * Base interval implementation (implements generic time interval)
+ */
 public class CustomInterval implements Interval {
 
     // region - fields

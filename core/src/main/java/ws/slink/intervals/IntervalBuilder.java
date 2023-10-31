@@ -16,6 +16,9 @@ import java.time.ZoneOffset;
 import java.time.temporal.TemporalAdjusters;
 import java.util.TimeZone;
 
+/**
+ * Interval builder - preferred way to construct intervals
+ */
 public class IntervalBuilder {
 
     // region - fields

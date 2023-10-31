@@ -16,6 +16,9 @@ import static ws.slink.intervals.jackson.internal.Constants.START_FIELD;
 import static ws.slink.intervals.jackson.internal.Constants.TIMEZONE_FIELD;
 import static ws.slink.intervals.jackson.internal.Constants.TYPE_FIELD;
 
+/**
+ * Jackson-based interval serializer
+ */
 public class IntervalSerializer extends StdSerializer<Interval> {
 
 

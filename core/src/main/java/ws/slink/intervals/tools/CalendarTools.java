@@ -16,6 +16,9 @@ import static ws.slink.intervals.tools.Formats.DAY_FORMATTER;
 import static ws.slink.intervals.tools.Formats.MONTH_FORMATTER;
 import static ws.slink.intervals.tools.Formats.YEAR_FORMATTER;
 
+/**
+ * Interval string parsers & custom temporal adjusters
+ */
 public final class CalendarTools {
 
     private CalendarTools() {

@@ -7,6 +7,9 @@ import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.TimeZone;
 
+/**
+ * `Month` implementation of Interval interface
+ */
 public class Month extends OffsetAwareInterval {
 
     public Month(TimeZone timezone, LocalDateTime start, LocalDateTime end) {
