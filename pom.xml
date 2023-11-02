@@ -24,9 +24,9 @@
     </modules>
 
     <scm>
-        <connection>scm:git:git://github.com/github.com/ws-slink/intervals4j.git</connection>
-        <developerConnection>scm:git:ssh://github.com:github.com/ws-slink/intervals4j.git</developerConnection>
-        <url>https://github.com/github.com/ws-slink/intervals4j/tree/master</url>
+        <connection>scm:git:git://github.com/slink-ws/intervals4j.git</connection>
+        <developerConnection>scm:git:ssh://github.com/slink-ws/intervals4j.git</developerConnection>
+        <url>https://github.com/slink-ws/intervals4j/tree/master</url>
     </scm>
 
     <developers>
