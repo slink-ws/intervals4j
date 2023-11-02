@@ -6,21 +6,21 @@
 
     <groupId>ws.slink</groupId>
     <artifactId>intervals4j</artifactId>
-    <version>0.0.2.1</version>
+    <version>0.0.2.2</version>
 
     <organization>
         <name>slink.ws</name>
-        <url>https://github.com/ws-slink</url>
+        <url>https://github.com/slink-ws</url>
     </organization>
 
     <name>intervals4j</name>
     <description>Intervals java library</description>
     <packaging>pom</packaging>
-    <url>https://github.com/ws-slink/intervals4j</url>
+    <url>https://github.com/slink-ws/intervals4j</url>
 
     <modules>
-        <module>core</module>
-        <module>jackson</module>
+        <module>intervals4j-core</module>
+        <module>intervals4j-jackson</module>
     </modules>
 
     <scm>
