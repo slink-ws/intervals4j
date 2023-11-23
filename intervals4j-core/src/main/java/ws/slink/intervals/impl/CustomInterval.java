@@ -1,7 +1,9 @@
 package ws.slink.intervals.impl;
 
 import ws.slink.intervals.Interval;
+import ws.slink.intervals.IntervalBuilder;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -89,6 +91,23 @@ public class CustomInterval implements Interval {
         return formatter.format(start) + " - " +
             formatter.format(end) + " " +
             timezone.getID();
+    }
+
+    @Override
+    public Interval shifted(Duration duration, boolean shiftForward) {
+        if (shiftForward) {
+            return new IntervalBuilder()
+                .timezone(this.timezone)
+                .start(this.start.plusNanos(duration.toNanos()))
+                .end(this.end.plusNanos(duration.toNanos()))
+                .build();
+        } else {
+            return new IntervalBuilder()
+                .timezone(this.timezone)
+                .start(this.start.minusNanos(duration.toNanos()))
+                .end(this.end.minusNanos(duration.toNanos()))
+                .build();
+        }
     }
 
     // endregion

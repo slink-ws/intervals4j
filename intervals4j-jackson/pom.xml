@@ -10,6 +10,8 @@
     </parent>
 
     <artifactId>intervals4j-jackson</artifactId>
+    <description>Intervals java library jackson (de)serialization functionality</description>
+    <url>https://github.com/slink-ws/intervals4j</url>
 
     <dependencies>
         <dependency>
