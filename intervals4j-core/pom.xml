@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>intervals4j-core</artifactId>
-
     <description>Intervals java library core functionality</description>
+    <url>https://github.com/slink-ws/intervals4j</url>
 
 </project>
