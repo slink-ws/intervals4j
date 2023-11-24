@@ -2,7 +2,6 @@ package ws.slink.intervals;
 
 import ws.slink.intervals.exception.MethodNotSupportedException;
 
-import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
@@ -56,7 +55,7 @@ public interface Interval {
      * - input value should be non-null
      * - no null-check is performed by this function
      *
-     * @return previous Interval
+     * @return true if value is within interval
      */
     boolean contains(Instant value);
 
@@ -65,7 +64,7 @@ public interface Interval {
      * - input value should be non-null
      * - no null-check is performed by this function
      *
-     * @return previous Interval
+     * @return true if value is within interval
      */
     default boolean contains(ZonedDateTime value) {
         return contains(value.toInstant());
@@ -85,47 +84,9 @@ public interface Interval {
      * returns extended interval including previous one
      * (only supported for fixed type intervals, such as day, month, year)
      *
-     * @return previous Interval
+     * @return extended Interval with previous one
      */
     default Interval withPrevious() {
-        throw new MethodNotSupportedException();
-    }
-
-    /**
-     * returns interval shifted by duration, parsed from duration string.
-     * duration string can be prepended with '-' sign to indicate that we should shift 'left',
-     * without it, we'll shift 'right'
-     *
-     * @return shifted Interval
-     */
-    default Interval shifted(String duration) {
-        if (duration == null || "".equals(duration.trim())) {
-            return this;
-        }
-        Duration d;
-        if (duration.startsWith("-")) {
-            return shifted(Duration.parse(duration.substring(1)), false);
-        } else {
-            return shifted(Duration.parse(duration));
-        }
-    }
-
-    /**
-     * returns interval shifted forward by duration.
-     *
-     * @return shifted Interval
-     */
-    default Interval shifted(Duration duration) {
-        return shifted(duration, true);
-    }
-
-    /**
-     * returns interval shifted by duration.
-     * if 'shiftForward' is true, we'll shift 'right', else we'll shift 'left'
-     *
-     * @return shifted Interval
-     */
-    default Interval shifted(Duration duration, boolean shiftForward) {
         throw new MethodNotSupportedException();
     }
 

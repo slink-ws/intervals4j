@@ -23,7 +23,7 @@ public class Day extends OffsetAwareInterval {
 
     @Override
     public Interval previous() {
-        LocalDateTime prev = this.start.minusDays(1);
+        LocalDateTime prev = this.getStart().minusDays(1);
         return IntervalBuilder.day(
             prev.getYear(),
             prev.getMonthValue(),
@@ -37,8 +37,8 @@ public class Day extends OffsetAwareInterval {
     public Interval withPrevious() {
         return new IntervalBuilder()
             .timezone(this.timezone)
-            .start(this.start.minusDays(1))
-            .end(this.end)
+            .start(this.getStart().minusDays(1))
+            .end(this.getEnd())
             .build();
     }
 

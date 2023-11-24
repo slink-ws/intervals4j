@@ -9,5 +9,6 @@ module intervals4j {
     // opened in run time
     opens ws.slink.intervals.impl;
     opens ws.slink.intervals.tools;
+    opens ws.slink.intervals;
 
 }
