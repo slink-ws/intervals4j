@@ -105,7 +105,7 @@ public class IntervalBuilder {
     }
 
     // endregion
-    // region - interval construction
+    // region - basic interval construction
 
     public Interval build() {
         return new CustomInterval(timezone, start, end, offset);
@@ -131,7 +131,8 @@ public class IntervalBuilder {
             throw new InvalidYearException(e.getMessage());
         }
     }
-
+    // endregion
+    // region -> custom interval builders: month
     public static Month month(int year, int month) {
         return month(year, month, "UTC", 0);
     }
@@ -150,7 +151,8 @@ public class IntervalBuilder {
             throw new InvalidMonthException(e.getMessage());
         }
     }
-
+    // endregion
+    // region -> custom interval builders: day
     public static Day day(int year, int month, int day) {
         return day(year, month, day, "UTC", 0);
     }
@@ -169,11 +171,9 @@ public class IntervalBuilder {
             throw new InvalidDayException(e.getMessage());
         }
     }
-
     // endregion
 
     // endregion
-
     // region - interval parsers
 
     public static Interval parse(String input) {

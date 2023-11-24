@@ -9,6 +9,7 @@ import org.junit.runners.Suite;
     IntervalBasicTests.class,
     IntervalBuilderTest.class,
     IntervalCustomTests.class,
+    IntervalShiftTest.class,
 })
 public class TestSuite {
 }
