@@ -6,7 +6,7 @@
 
     <groupId>ws.slink</groupId>
     <artifactId>intervals4j</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 
     <organization>
         <name>slink.ws</name>
