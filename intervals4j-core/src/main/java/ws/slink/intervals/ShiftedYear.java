@@ -17,21 +17,11 @@ public class ShiftedYear extends ShiftedInterval {
     }
 
     @Override
-    public Interval previous() {
-        return ShiftedYear.create(
-            new IntervalBuilder()
-                .start(this.base.getStart().minusYears(1))
-                .end(this.base.getEnd().minusYears(1))
-                .timezone(this.base.timezone())
-                .build(),
-            this.shift
-        );
-    }
-    @Override
     public Interval withPrevious() {
+        Interval previous = this.getBase().previous();
         return ShiftedYear.create(
             new IntervalBuilder()
-                .start(this.base.getStart().minusYears(1))
+                .start(previous.getStart())
                 .end(this.base.getEnd())
                 .timezone(this.base.timezone())
                 .build(),

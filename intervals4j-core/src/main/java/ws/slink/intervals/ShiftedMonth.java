@@ -17,21 +17,11 @@ public class ShiftedMonth extends ShiftedInterval {
     }
 
     @Override
-    public Interval previous() {
-        return ShiftedMonth.create(
-            new IntervalBuilder()
-                .start(this.base.getStart().minusMonths(1))
-                .end(this.base.getEnd().minusMonths(1))
-                .timezone(this.base.timezone())
-                .build(),
-            this.shift
-        );
-    }
-    @Override
     public Interval withPrevious() {
+        Interval previous = this.getBase().previous();
         return ShiftedMonth.create(
             new IntervalBuilder()
-                .start(this.base.getStart().minusMonths(1))
+                .start(previous.getStart())
                 .end(this.base.getEnd())
                 .timezone(this.base.timezone())
                 .build(),

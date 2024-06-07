@@ -53,6 +53,11 @@ public class ShiftedInterval implements Interval {
         Instant ei = (Instant)shifted(getBase().end());
         return (si.isBefore(value) || si.equals(value)) && (ei.isAfter(value) || ei.equals(value));
     }
+    @Override
+    public Interval previous() {
+        Interval previous = this.getBase().previous();
+        return ShiftedInterval.of(previous, this.shift);
+    }
     // endregion
     // region - ShiftedInterval API
     public Interval getBase() {
