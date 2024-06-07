@@ -17,17 +17,6 @@ public class ShiftedDay extends ShiftedInterval {
     }
 
     @Override
-    public Interval previous() {
-        return ShiftedDay.create(
-            new IntervalBuilder()
-                .start(this.base.getStart().minusDays(1))
-                .end(this.base.getEnd().minusDays(1))
-                .timezone(this.base.timezone())
-                .build(),
-            this.shift
-        );
-    }
-    @Override
     public Interval withPrevious() {
         return ShiftedDay.create(
             new IntervalBuilder()
