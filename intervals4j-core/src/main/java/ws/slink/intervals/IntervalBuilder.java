@@ -27,6 +27,7 @@ public class IntervalBuilder {
     private int offset;
     private LocalDateTime start = CalendarTools.MIN_DATE;
     private LocalDateTime end = CalendarTools.MAX_DATE;
+    private String startStr, endStr;
 
     // endregion
     // region - field initialization
@@ -74,6 +75,13 @@ public class IntervalBuilder {
         this.start = newStart;
         return this;
     }
+    public IntervalBuilder start(String value) {
+        if (value == null || value.trim().equals("")) {
+            throw new IllegalArgumentException("start date should not be null");
+        }
+        this.startStr = value;
+        return this;
+    }
     public IntervalBuilder end(LocalDateTime value) {
         if (value == null) {
             throw new IllegalArgumentException("end date-time should not be null");
@@ -103,11 +111,26 @@ public class IntervalBuilder {
         this.end = newEnd;
         return this;
     }
+    public IntervalBuilder end(String value) {
+        if (value == null || value.trim().equals("")) {
+            throw new IllegalArgumentException("end date should not be null");
+        }
+        this.endStr = value;
+        return this;
+    }
 
     // endregion
     // region - basic interval construction
 
     public Interval build() {
+        if (startStr != null) {
+            Interval i = parse(startStr, timezone.getID(), offset);
+            this.start = i.getStart();
+        }
+        if (endStr != null) {
+            Interval i = parse(endStr, timezone.getID(), offset);
+            this.end = i.getEnd();
+        }
         return new CustomInterval(timezone, start, end, offset);
     }
 
